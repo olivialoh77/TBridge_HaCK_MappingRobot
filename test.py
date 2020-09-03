@@ -16,15 +16,19 @@ class Car():
     def get_pos(self):
         return (self.x, self.y)
 
-    def move_left(self, event):
-        self.x -= 3
-        draw_path(self.canvas, self)
+    #def move_left(self, event):
+    #    self.x -= 3
+    #    draw_path(self.canvas, self)
+
+def move_left(event, canvas, car):
+    car.x -= 5
+    draw_path(canvas, car)
 
 def draw_path(canvas, car):
 
     canvas.create_rectangle(car.x, car.y, car.x+car.size, car.y+car.size, fill='red')
     #canvas.move(car.rectangle,-1,0)
-    print('should redraw')
+    #print('should redraw')
     #print(car.x)
     #canvas.update()
 
@@ -39,7 +43,7 @@ def main():
     my_canvas = Canvas(root, width=window_width, height=window_height)
     my_canvas.pack()
     car = Car(my_canvas)
-    root.bind("<KeyPress-Left>", lambda event: car.move_left(event))
+    root.bind("<KeyPress-Left>", lambda event: move_left(event, my_canvas, car))
     root.bind("<Button-1>", lambda event: draw_wall(event, my_canvas, car))
 
     draw_path(my_canvas, car)
