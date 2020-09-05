@@ -5,7 +5,6 @@ window_height = 500
 
 class Car():
     def __init__(self, master=None):
-        #self.master = master
         self.canvas = Canvas(master)
         self.x = window_width / 2
         self.y = window_height - 100
