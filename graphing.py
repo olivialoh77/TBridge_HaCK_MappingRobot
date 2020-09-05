@@ -3,8 +3,11 @@ import tkinter as tk
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 500
 
+rect_queue = []
+draw_flag = False
 
-coordinate = [(300, 300), (400, 300), (400, 500)]
+coordinate = [(150, 300), (300, 300), (200, 50),\
+    (50, 400)]
 
 class Car():
     def __init__(self, canvas):
@@ -33,33 +36,38 @@ class Car():
         self.draw(canvas)
         drawObject(canvas, coordinate, self)
 
+    # Drawing a car onto canvas
     def draw(self, canvas):
-        canvas.create_rectangle(self.x, self.y, self.x + self.size, self.y + self.size, fill='red')
+        if(draw_flag):
+            if len(rect_queue) != 0:
+                canvas.delete(rect_queue[0])
+                rect_queue.pop()
+                pass
+        x = canvas.create_rectangle(self.x, self.y, self.x + self.size, self.y + self.size, fill='red')
+        rect_queue.append(x)
 
+# Drawing object/wall/obstacles onto canvas
 def drawObject(canvas, object_coordinate, car):
-    #x = event.x
-    #y = event.y
-    print('wow')
+    size = 3
     for (x,y) in object_coordinate:
-        print(x)
-        print(y)
         if car.x == x or car.y == x:
-            print('true')
-            canvas.create_oval(x-2, y-2, x+2, y+2, fill='blue')
+            canvas.create_oval(x-size, y-size, x+size, y+size, fill='blue')
 
 def main():
+
+    # Create Tkinter window
     window = tk.Tk()
     my_canvas = tk.Canvas(window, width=WINDOW_WIDTH, height=WINDOW_HEIGHT, bg='grey')
     my_canvas.pack()
 
     car = Car(my_canvas)
 
+    # Key bindings for testing
     window.bind("<KeyPress-Left>", lambda event: car.moveLeft(event, my_canvas))
     window.bind("<KeyPress-Right>", lambda event: car.moveRight(event, my_canvas))
     window.bind("<KeyPress-Up>", lambda event: car.moveUp(event, my_canvas))
     window.bind("<KeyPress-Down>", lambda event: car.moveDown(event, my_canvas))
     #window.bind("<Button-1>", lambda event: drawObject(event, my_canvas, coordinate, car))
-    lambda event: drawObject(event, my_canvas, coordinate, car)
-    window.mainloop()
+    window.mainloop() # keep looping until there's a new event
 
 main()
