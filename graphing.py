@@ -4,10 +4,8 @@ import csv
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 600
 
-rect_queue = []
+car_queue = []
 draw_flag = False
-
-
 car_coordinate = []
 object_coordinate = []
 
@@ -17,7 +15,8 @@ class Car():
         self.y = 100
         self.size = 20
         #self.draw(canvas)
-    '''
+# for moving with keyboards and for debugging
+'''
     def moveLeft(self, event, canvas):
         self.x -= 5
         self.draw(canvas)
@@ -41,12 +40,12 @@ class Car():
     # Drawing a car onto canvas
     def draw(self, canvas):
         if(draw_flag):
-            if len(rect_queue) != 0:
-                canvas.delete(rect_queue[0])
-                rect_queue.pop()
+            if len(car_queue) != 0:
+                canvas.delete(car_queue[0])
+                car_queue.pop()
                 pass
         x = canvas.create_rectangle(self.x, self.y, self.x + self.size, self.y + self.size, fill='red')
-        rect_queue.append(x)
+        car_queue.append(x)
 
 # Drawing object/wall/obstacles onto canvas
 def drawObject(canvas, car_coordinate, object_coordinate, car):
@@ -60,7 +59,7 @@ def main():
     # Create Tkinter window
     window = tk.Tk()
     my_canvas = tk.Canvas(window, width=WINDOW_WIDTH, height=WINDOW_HEIGHT, bg='grey')
-    my_canvas.pack()
+    my_canvas.pack() # make width and height adjustment works on the canvas
 
     car = Car(my_canvas)
 
@@ -83,7 +82,7 @@ def main():
     # for resizing
     coeff = 30
 
-    # draw
+    # draw car and object
     for car_coord in car_coordinate:
 
         my_canvas.create_rectangle(float(car_coord[0]) * coeff, float(car_coord[1]) * coeff, 
