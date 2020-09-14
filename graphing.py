@@ -8,34 +8,32 @@ car_queue = []
 car_coordinate = []
 object_coordinate = []
 
-data_string = "14,1,10,4"
-data_string_2 = [15,2,11,5]
+# for testing
+#data_string = "14,1,10,4"
+#data_string_2 = [15,2,11,5]
 
 def draw(data_string, canvas):
-    # Create Tkinter window
-    '''window = tk.Tk()
-    my_canvas = tk.Canvas(window, width=WINDOW_WIDTH, height=WINDOW_HEIGHT, bg='grey')
-    my_canvas.pack() # make width and height adjustment works on the canvas
-'''
+
+    # case: data is string
     if isinstance(data_string, str):
         readCSV = csv.reader([data_string], delimiter=',')
-        counter = 0
+        #counter = 0
         for row in readCSV:
             x_car = row[0]
             y_car = row[1]
             x_object = row[2]
             y_object = row[3]
+            car_coordinate.append((x_car, y_car))
+            object_coordinate.append((x_object, y_object))
+    # case: data is list/array
     else:
         for row in data_string:
             x_car = row[0]
             y_car = row[1]
             x_object = row[2]
             y_object = row[3]
-
-    car_coordinate.append((x_car, y_car))
-    object_coordinate.append((x_object, y_object))
-    #print(car_coordinate)
-    #print(object_coordinate)
+            car_coordinate.append((x_car, y_car))
+            object_coordinate.append((x_object, y_object))
 
     # for resizing
     coeff = 30
