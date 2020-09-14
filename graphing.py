@@ -7,7 +7,7 @@ WINDOW_HEIGHT = 600
 car_queue = []
 car_coordinate = []
 object_coordinate = []
-
+visited_flag = False
 # for testing
 #data_string = "14,1,10,4"
 #data_string_2 = [15,2,11,5]
@@ -34,6 +34,13 @@ def draw(data_string, canvas):
             y_object = row[3]
             car_coordinate.append((x_car, y_car))
             object_coordinate.append((x_object, y_object))
+    
+    # check if the car has traveled every side or not. Return if visited all 4 sides
+    # assume that starts at 1->2->3->4->1, then return
+    if row[4] != 1 and visited_flag == False:
+        visited_flag = True
+    elif row[4] == 1 and visited_flag == True:
+        return() # return since the car already traveled the whole course
 
     # for resizing
     coeff = 30
