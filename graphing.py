@@ -34,14 +34,15 @@ def draw(data_string, canvas):
             y_object = row[3]
             car_coordinate.append((x_car, y_car))
             object_coordinate.append((x_object, y_object))
-'''DONT KNOW IF THE SIDE NUMBER IS NEEDED OR NOT    
+    '''
+    DONT KNOW IF THE SIDE NUMBER IS NEEDED OR NOT    
     # check if the car has traveled every side or not. Return if visited all 4 sides
     # assume that starts at 1->2->3->4->1, then return
     if row[4] != 1 and visited_flag == False:
         visited_flag = True
     elif row[4] == 1 and visited_flag == True:
         return() # return since the car already traveled the whole course
-'''
+    '''
     # for resizing
     coeff = 30
     size = 20
@@ -56,7 +57,7 @@ def draw(data_string, canvas):
         canvas.create_oval(float(obj_coord[0]) * coeff, float(obj_coord[1]) * coeff, 
         float(obj_coord[0]) * coeff + 5, float(obj_coord[1]) * coeff + 5, fill='blue')
     
-    canvas.mainloop() # keep looping until there's a new event
+    #canvas.mainloop() # keep looping until there's a new event
 
 '''
 def main():
