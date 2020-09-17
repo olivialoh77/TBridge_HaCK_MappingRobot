@@ -8,13 +8,12 @@ def signal_handler(signal, frame):
 	SerialPort.close()
 	sys.exit(0)
 
-COM=input("Enter the COM Port\n")
-BAUD=input("Enter the Baudrate\n")
-SerialPort = serial.Serial(COM,BAUD,timeout=1)
-#time.sleep(0.2)
-#SerialPort.write("I")
-
 def getData():
+	COM=input("Enter the COM Port\n")
+	BAUD=input("Enter the Baudrate\n")
+	SerialPort = serial.Serial(COM,BAUD,timeout=1)
+	time.sleep(0.2)
+	SerialPort.write("I")
 	while (1):
 		try:
 			OutgoingData=input('> ')
@@ -24,7 +23,7 @@ def getData():
 			SerialPort.close()
 			sys.exit(0)
 		IncomingData=SerialPort.readline()
-		if(IncomingData):
+		if(IncomingData): # ASSUME INCOMING DATA IS A LIST OF 6 INDICES
 			print((IncomingData).decode('utf-8'))
-			return(0,0,0,0) # <---- DATA GOES HERE
+			return(IncomingData) # <---- DATA GOES HERE
 		time.sleep(0.01)

@@ -8,7 +8,7 @@ WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 600
 
 def main():
-    # get data from bluetooth in 1 minute
+    # get data from bluetooth in 1 minute <- can change later
     coordinate = []
     minute = 1
     t_end = (time.time() + 60) * minute
